@@ -59,11 +59,17 @@ Instructions:
 					braces--;
 				}
 				
-				// Check if the current character is the specified operator and not within parentheses
+				// Check if the current character is the specified operator and not within parentheses (also checking for the exponent operator)
 				if (braces == 0 && operator == curCh) {
 					result.push(currentChunk);
 					currentChunk = "";
-				} 
+				}
+				// Checking for two char operands
+				else if (braces == 0 && operator == expression[i] + expression[i + 1]) {
+					result.push(currentChunk);
+					currentChunk = "";
+					i++;	// Skipping the second character of the operand
+				}
 				// If not, add the character to the current chunk
 				else {
 					currentChunk += curCh;
@@ -92,8 +98,8 @@ Instructions:
 			});
 
 			// const initialValue
-			const result = numbers.reverse.reduce((acc, no) => no ** acc);
-			return result;
+			const result = numbers.reverse().reduce((acc, no) => no ** acc);
+			return numbers.reverse()[0];
 			
 		}
 		
