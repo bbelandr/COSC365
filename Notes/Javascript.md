@@ -545,6 +545,14 @@ let y = 50
 console.log(`${x} ass ${y}`)
 ```
 Surround the string with backticks and use $ along with { } to build a string
+
+String Checking:
+```js
+let myString = "**";
+if ('**' == myString[0] + myString[1]) {
+	console.log("Pizza!");
+}
+```
 ## Actual Maps in JS
 These are real key value pairs. There are also weakMaps
 ```js
