@@ -172,7 +172,7 @@ Instructions:
 			const resultNode = document.getElementById('result');
 			
 			// Get the expression value from the input field
-			const expression = expressionNode.value;
+			const expression = expressionNode.value.replace(/ /g, '');	// Removing all spaces from the input
 			
 			// Parse the expression and update the result input field
 			const result = parsePlusSeparatedExpression(expression);
