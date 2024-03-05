@@ -2,7 +2,7 @@
 # What is Javascript
 Very popular with web development.
 Mostly used on the front end
-* Javascript is a High-Level, Object-Oriented, Multi-Paradigm Programming Language
+* Javascript is a High-Level, Object-jOriented, Multi-Paradigm Programming Language
 	* High level because we don't have to worry about memory management
 	* Multi-paradigm because you can use different styles of programming
 	* Programming Language because it can instruct computers to do things
@@ -510,6 +510,8 @@ Just look this up, his explanations are bad
 const numbers = [1, 2, 3, 4, 5]
 
 console.log(numbers.slice(1, 3))
+const obj1 = {first: 20, second: 30, first: 50}
+console.log(NaN === NaN)
 ```
 
 ##### splice()
