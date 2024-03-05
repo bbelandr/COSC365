@@ -77,12 +77,10 @@ Instructions:
 			
 			return result;
 		};
+		
+		const parseExponentSeparatedExpression = (expression) => {
+			const numbersString = split(expression, '**');
 
-		// Function to parse expressions separated by division
-		const parseDivisionSeparatedExpression = (expression) => {
-			// Split the expression by '/' operator
-			const numbersString = split(expression, '/');
-			
 			// Convert each part to either a number or recursively parse if within parentheses
 			const numbers = numbersString.map(noStr => {
 				if (noStr[0] == '(') {
@@ -93,6 +91,18 @@ Instructions:
 				return +noStr; // Convert string to number
 			});
 
+			// const initialValue
+			const result = numbers.reverse.reduce((acc, no) => no ** acc);
+			return result;
+			
+		}
+		
+		// Function to parse expressions separated by division
+		const parseDivisionSeparatedExpression = (expression) => {
+			// Split the expression by '/' operator
+			const numbersString = split(expression, '/');
+			const numbers = numbersString.map(noStr => parseExponentSeparatedExpression(noStr));			
+			
 			// Calculate the result by dividing all the numbers
 			const initialValue = numbers[0];
 			const result = numbers.slice(1).reduce((acc, no) => acc / no, initialValue);
