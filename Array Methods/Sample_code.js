@@ -1,0 +1,130 @@
+///////////////////////////////////////   Sample Code 1
+
+// Sample array containing student scores
+const studentScores = [70, 85, 90, 65, 80];
+
+// Function to calculate the total score of all students
+function calculateTotalScore() {
+
+    const totalScore = studentScores.reduce((accumulator, value) => accumulator + value);
+    alert("Total score of all students: " + totalScore);
+}
+
+// Function to find the average score of all students
+function calculateAverageScore() {
+    let totalScore = studentScores.reduce((accumulator, value) => accumulator + value);
+    const averageScore = totalScore / studentScores.length;
+    alert("Average score of all students: " + averageScore);
+}
+
+// Function to find and alert the highest score
+function findHighestScore() {
+  let highestScore = studentScores.reduce((prevVal, curVal) => {
+    if (curVal > prevVal) {
+        return curVal;
+    }
+    else {
+        return prevVal;
+    }
+  });
+
+  alert("Highest score among students: " + highestScore);
+}
+
+// Function to find and alert the lowest score
+function findLowestScore() {
+    let lowestScore = studentScores.reduce((prevVal, curVal) => {
+        if (curVal < prevVal) {
+            return curVal;
+        }
+        else {
+            return prevVal;
+        }
+      });
+      alert("Lowest score among students: " + lowestScore);
+}
+
+// Call functions
+calculateTotalScore();
+calculateAverageScore();
+findHighestScore();
+findLowestScore();
+// 390 78 90 65
+
+
+
+
+///////////////////////////////////////   Sample Code 2
+
+// Define a class for creating a shopping cart
+class ShoppingCart {
+  constructor() {
+    this.items = [];
+  }
+
+  // Method to add items to the cart
+  addItem(item) {
+    this.items.push(item);
+    alert(`${item.name} added to the cart.`);
+  }
+
+  // Method to remove items from the cart
+  removeItem(itemName) {
+    this.items = this.items.filter(item => item.name !== itemName);
+    alert(`${itemName} removed from the cart.`);
+  }
+
+  // Method to calculate the total price of items in the cart
+  calculateTotal() {
+    return this.items.reduce((total, item) => total + item.price, 0);
+  }
+
+  // Method to display items in the cart
+  displayItems() {
+    console.log("Items in the cart:");
+    this.items.forEach(item => console.log(item.name));
+  }
+}
+
+// Sample data for testing
+const itemsData = [
+  { name: "Apples", price: 2 },
+  { name: "Bananas", price: 1 },
+  { name: "Oranges", price: 3 }
+];
+
+// Function to simulate adding items to the cart with a delay
+function simulateAddingItems(cart, items) {
+  items.map(item => {
+    setTimeout(() => {
+      cart.addItem(item);
+    }, 1000);
+  });
+}
+
+// Function to simulate removing items from the cart with an interval
+function simulateRemovingItems(cart) {
+  setInterval(() => {
+    if (cart.items.length > 0) {
+      const randomIndex = Math.floor(Math.random() * cart.items.length);
+      const randomItem = cart.items[randomIndex];
+      cart.removeItem(randomItem.name);
+    }
+  }, 2000);
+}
+
+// Create a new shopping cart instance
+const myCart = new ShoppingCart();
+
+// Simulate adding items to the cart
+simulateAddingItems(myCart, itemsData);
+
+// Simulate removing items from the cart
+simulateRemovingItems(myCart);
+
+
+
+//////////////////////////////////////////////////
+
+
+

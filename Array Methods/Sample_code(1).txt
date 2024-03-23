@@ -1,0 +1,110 @@
+///////////////////////////////////////   Sample Code 1
+
+// Sample array containing student scores
+const studentScores = [70, 85, 90, 65, 80];
+
+// Function to calculate the total score of all students
+function calculateTotalScore() {
+  let totalScore = 0;
+  for (let i = 0; i < studentScores.length; i++) {
+    totalScore += studentScores[i];
+  }
+  alert("Total score of all students: " + totalScore);
+}
+
+// Function to find the average score of all students
+function calculateAverageScore() {
+  let totalScore = 0;
+  for (let i = 0; i < studentScores.length; i++) {
+    totalScore += studentScores[i];
+  }
+  const averageScore = totalScore / studentScores.length;
+  alert("Average score of all students: " + averageScore);
+}
+
+// Function to find and alert the highest score
+function findHighestScore() {
+  let highestScore = studentScores[0];
+  for (let i = 1; i < studentScores.length; i++) {
+    if (studentScores[i] > highestScore) {
+      highestScore = studentScores[i];
+    }
+  }
+  alert("Highest score among students: " + highestScore);
+}
+
+// Function to find and alert the lowest score
+function findLowestScore() {
+  let lowestScore = studentScores[0];
+  for (let i = 1; i < studentScores.length; i++) {
+    if (studentScores[i] < lowestScore) {
+      lowestScore = studentScores[i];
+    }
+  }
+  alert("Lowest score among students: " + lowestScore);
+}
+
+// Call functions
+calculateTotalScore();
+calculateAverageScore();
+findHighestScore();
+findLowestScore();
+
+
+
+
+
+///////////////////////////////////////   Sample Code 2
+
+// Sample code for tax calculation
+
+// Object representing a product
+function Product(name, price) {
+  this.name = name;
+  this.price = price;
+}
+
+// Array of products
+const products = [
+  new Product('Shirt', 20),
+  new Product('Pants', 30),
+  new Product('Shoes', 50),
+];
+
+// Function to calculate total price of products with tax
+function calculateTotal(products) {
+  let totalPrice = 0;
+  for (let i = 0; i < products.length; i++) {
+    const product = products[i];
+    totalPrice += product.price;
+  }
+  return totalPrice;
+}
+
+// Function to calculate tax
+function calculateTax(totalPrice, taxRate) {
+  return totalPrice * taxRate;
+}
+
+// Function to display alert with tax information
+function displayTaxInformation(totalPrice, tax) {
+  alert(`Total Price: $${totalPrice.toFixed(2)}\nTax: $${tax.toFixed(2)}`);
+}
+
+// Calculate total price
+const totalPrice = calculateTotal(products);
+
+// Tax rate
+const taxRate = 0.1;
+
+// Calculate tax
+const tax = calculateTax(totalPrice, taxRate);
+
+// Display tax information
+displayTaxInformation(totalPrice, tax);
+
+
+//////////////////////////////////////////////////
+
+
+
