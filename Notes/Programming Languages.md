@@ -42,7 +42,7 @@ x
 
 Parsing will create a **parse tree**, which is the exact same as the things produced by CFG's in CS312.
 
-A parsing example can be found in [[HTML]]. 
+A parsing example can be found in [[COSC365/Notes/HTML]]. 
 
 ##### AST
 Creating an AST is the second step of lexical analysis. This takes parsed input and determines what the individual tokens are. 

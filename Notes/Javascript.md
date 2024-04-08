@@ -6,7 +6,7 @@ Mostly used on the front end
 	* High level because we don't have to worry about memory management
 	* Multi-paradigm because you can use different styles of programming
 	* Programming Language because it can instruct computers to do things
-* Think of [[HTML]], [[CSS]], and Javascript like this
+* Think of [[COSC365/Notes/HTML]], [[CSS]], and Javascript like this
 	* HTML is like the nouns
 	* JS is like the verbs
 	* CSS is like the adjectives
