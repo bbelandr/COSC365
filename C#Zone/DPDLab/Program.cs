@@ -10,15 +10,15 @@ using System.Buffers.Binary;
 
 interface ICompValue : System.IComparable {
     //  CompareTo(object)
-     // Needs to:
-     // return -1 if this.Val < object.Val (object typecasted into ICompValue)
-     // return 0 if this.Val == object.Val (object typecasted into ICompValue)
-     // return 1 if this.Val > object.Val
+    // Needs to:
+    // return -1 if this.Val < object.Val (object typecasted into ICompValue)
+    // return 0 if this.Val == object.Val (object typecasted into ICompValue)
+    // return 1 if this.Val > object.Val
 
-     // Raw property (gets/sets the RAW DPD or BCD)
-     uint Raw { get; set; }
-     // Decoded property (gets the actual number)
-     uint Val { get; }
+    // Raw property (gets/sets the RAW DPD or BCD)
+    uint Raw { get; set; }
+    // Decoded property (gets the actual number)
+    uint Val { get; }
 }
 
 public struct ByteArray {
@@ -29,6 +29,9 @@ public struct ByteArray {
             bytes.Add(b);
             // bytes.Add(BinaryPrimitives.ReverseEndianness(b));
         }
+    }
+    public ByteArray() {
+        bytes = new List<byte>();
     }
     public int at(int index) {
         int byteIndex = index / 8;
@@ -79,9 +82,23 @@ class BCDReader {
 
 class DPDReader {
     
+    private ByteArray[] byteGroups;
+    private void createGroups(ByteArray RawBytes) {
+
+    }
+    private int findRow(ByteArray bytes) {  // returns which row the bytes need to be read from
+        return 0;       
+    }
     public int DecodeBytes(byte[] RawBytes) {
         ByteArray bytes = new ByteArray(RawBytes);
         
+        // Separate into groups
+
+        // Find the row for each group
+
+        // Decode to BCD
+
+        // Read the numbers
         
         return 5;
     }
