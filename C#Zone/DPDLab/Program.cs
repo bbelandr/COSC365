@@ -43,11 +43,13 @@ public struct ByteArray {
         return retVal;
     }
 
-    public void dumpBits() {
-        foreach (byte b in bytes) {
-            for (int i = 0; i < 8; i++) {
-                // Console.Write()
+    public void dumpBits() {    // Debugging function
+        for (int i = 0; i < 32; i++) {
+            Console.Write(at(i));
+            if (i % 8 == 7) {
+                Console.WriteLine("");
             }
+
         }
     }
 
@@ -80,24 +82,24 @@ class DPDReader {
     public int DecodeBytes(byte[] RawBytes) {
         ByteArray bytes = new ByteArray(RawBytes);
         
-        for (int i = 0; i < 32; i++) {
-            Console.Write(bytes.at(i));
-            if (i % 8 == 7) {
-                Console.WriteLine("");
-            }
-
-        }
+        
         return 5;
     }
 }
 
 class Program {
     public static void Main(string[] args) {
+        Console.WriteLine(args.Length);
+        if (args.Length != 1) {
+            Console.WriteLine("Incorrect amount of command line args");
+            return;
+        }
+        
         // byte[] myBytes = File.ReadAllBytes("bcd.2000"); // Maybe want a try catch statement here
         BinaryReader br;
 
         try {
-            br = new BinaryReader(new FileStream("bcd.2000", FileMode.Open));
+            br = new BinaryReader(new FileStream(args[0], FileMode.Open));
         }
         catch (IOException e) {
             Console.WriteLine(e.Message + "\n Can't open the file");
@@ -113,13 +115,13 @@ class Program {
         EncodedNum = br.ReadBytes(4);
         if (DPDFlag) {
             // Do DPD
-            Console.WriteLine("I am doing DPD rn");
+            // Console.WriteLine("I am doing DPD rn");
+            Console.WriteLine(dpd.DecodeBytes(EncodedNum));
         }
         else {
             // Do BCD
-            Console.WriteLine(dpd.DecodeBytes(EncodedNum));
+            Console.WriteLine(bcd.DecodeBytes(EncodedNum));
             
-            // Console.WriteLine(bcd.DecodeBytes(EncodedNum));
         }
 
 
