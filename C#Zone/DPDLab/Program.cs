@@ -32,21 +32,12 @@ public struct ByteArray {
     }
     public int at(int index) {
         int byteIndex = index / 8;
-        int bitIndex = index % 8;
+        int bitIndex = 7 - (index % 8);     // taking the complement of the index asked for because each byte is stored backwards
         if (byteIndex >= bytes.Count) {
             Console.WriteLine("Index out of scope");
             return -1;
         }
 
-        // if (((1 << bitIndex) & bytes[byteIndex]) == 1) {
-        //     return 1;
-        // }
-        // else {
-        //     return 0;
-        // }
-        // int retval;
-
-        // vals.Add((b & ()1 << i)) == 0 ? '0' : '1');
         int retVal = (bytes[byteIndex] & (1 << bitIndex)) == 0 ? 0 : 1;
 
         return retVal;
@@ -86,18 +77,14 @@ class BCDReader {
 
 class DPDReader {
     
-    // Helper function for returning bits
-    bool GetBit(byte[] bytes, int index) {
-        int currentByte = index / 8;
-        Console.WriteLine(currentByte);
-        return false;
-    }
-
     public int DecodeBytes(byte[] RawBytes) {
         ByteArray bytes = new ByteArray(RawBytes);
         
         for (int i = 0; i < 32; i++) {
-            Console.Write(bytes.at(i) + " ");
+            Console.Write(bytes.at(i));
+            if (i % 8 == 7) {
+                Console.WriteLine("");
+            }
 
         }
         return 5;
@@ -130,9 +117,9 @@ class Program {
         }
         else {
             // Do BCD
-            // Console.WriteLine(dpd.DecodeBytes(EncodedNum));
+            Console.WriteLine(dpd.DecodeBytes(EncodedNum));
             
-            Console.WriteLine(bcd.DecodeBytes(EncodedNum));
+            // Console.WriteLine(bcd.DecodeBytes(EncodedNum));
         }
 
 
