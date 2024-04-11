@@ -1,0 +1,15 @@
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\bin\Debug\net8.0\DPDLab.exe
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\bin\Debug\net8.0\DPDLab.deps.json
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\bin\Debug\net8.0\DPDLab.runtimeconfig.json
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\bin\Debug\net8.0\DPDLab.dll
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\bin\Debug\net8.0\DPDLab.pdb
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\obj\Debug\net8.0\DPDLab.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\obj\Debug\net8.0\DPDLab.AssemblyInfoInputs.cache
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\obj\Debug\net8.0\DPDLab.AssemblyInfo.cs
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\obj\Debug\net8.0\DPDLab.csproj.CoreCompileInputs.cache
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\obj\Debug\net8.0\DPDLab.sourcelink.json
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\obj\Debug\net8.0\DPDLab.dll
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\obj\Debug\net8.0\refint\DPDLab.dll
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\obj\Debug\net8.0\DPDLab.pdb
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\obj\Debug\net8.0\DPDLab.genruntimeconfig.cache
+C:\Users\spart\OneDrive\SchoolDocuments\COSC\COSC365\C#Zone\DPDLab\obj\Debug\net8.0\ref\DPDLab.dll
