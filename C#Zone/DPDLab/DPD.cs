@@ -2,6 +2,13 @@ using System.Text.RegularExpressions;
 
 class DPD : ICompValue {
     private uint _raw;
+
+    private bool IsBitSet(uint bits, int index) {
+        return ((bits >> index) & 1) == 1;
+    }
+    private void SetBit(ref uint bits, int index) {
+        bits = bits | (uint)(1 << index);
+    }
     int IComparable.CompareTo(object? obj) {
         // TODO: Compare objects
         return -1;
@@ -18,7 +25,6 @@ class DPD : ICompValue {
 
     public uint Val {
         get {
-            // Decode here
 
             // Separate into groups
             ushort[] bitGroups = new ushort[3];    // What stores the 3 groupings of numbers
@@ -58,12 +64,25 @@ class DPD : ICompValue {
                     case 0b_000_11_0_111_0:     // Row 8
                         rows[i] = 8;
                         continue;
-                    default:
+                    default:                    // This should never happen
                         Console.WriteLine(Convert.ToString(bitGroups[i], 2) + " not recognized as DPD format");
+                        rows[i] = -1;
                         break;
                 }
                 
             }
+
+            uint ass = 1;
+            SetBit(ref ass, 2);
+            SetBit(ref ass, 1);
+            Console.WriteLine(ass);
+            // // Do the conversions to BCD
+            // for (int i = 0; i < bitGroups.Length; i++) {
+            //     switch (rows[i]) {
+            //         case 1:
+
+            //     }
+            // }
             
             return bitGroups[2];
         }
