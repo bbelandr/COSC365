@@ -1,13 +1,4 @@
-﻿// Benjamin Belandres
-// Read in a file, decode the binary information from BCD/DPD and sort it into a text file called <openedFileName>.out
-
-// See https://aka.ms/new-console-template for more information
-
-using System;
-using System.Dynamic;
-using System.Net.Http.Headers;
-using System.Buffers.Binary;
-
+﻿using System.Buffers.Binary;
 interface ICompValue : System.IComparable {
     //  CompareTo(object)
     // Needs to:
@@ -21,97 +12,16 @@ interface ICompValue : System.IComparable {
     uint Val { get; }
 }
 
-public struct ByteArray {
-    private List<byte> bytes;
-    public ByteArray(byte[] inBytes) {
-        bytes = new List<byte>();
-        foreach (byte b in inBytes) {
-            bytes.Add(b);
-            // bytes.Add(BinaryPrimitives.ReverseEndianness(b));
-        }
-    }
-    public ByteArray() {
-        bytes = new List<byte>();
-    }
-    public int at(int index) {
-        int byteIndex = index / 8;
-        int bitIndex = 7 - (index % 8);     // taking the complement of the index asked for because each byte is stored backwards
-        if (byteIndex >= bytes.Count) {
-            Console.WriteLine("Index out of scope");
-            return -1;
-        }
-
-        int retVal = (bytes[byteIndex] & (1 << bitIndex)) == 0 ? 0 : 1;
-
-        return retVal;
-    }
-
-    public void dumpBits() {    // Debugging function
-        for (int i = 0; i < 32; i++) {
-            Console.Write(at(i));
-            if (i % 8 == 7) {
-                Console.WriteLine("");
-            }
-
-        }
-    }
-
-}
-
-
-class BCDReader {
-    // This starts from the rightmost bits and then moves onwards
-    public int DecodeBytes(byte[] RawBytes) {  // Takes in a set of bytes to decode
-        int decodedNum = 0;
-        int currentPlace = 0;
-        int individualNum;
-        for (int i = 0; i < RawBytes.Length; i++) {
-            // Get the right bits
-            individualNum = RawBytes[RawBytes.Length - 1 - i] & 0b_0000_1111;
-            decodedNum += individualNum * (int)Math.Pow(10, currentPlace++);
-            
-            // Get the left bits
-            individualNum = RawBytes[RawBytes.Length - 1 - i] >> 4;
-            decodedNum += individualNum * (int)Math.Pow(10, currentPlace++);
-            
-        }
-        
-        return decodedNum;
-    }
-}
-
-class DPDReader {
-    
-    private ByteArray[] byteGroups;
-    private void createGroups(ByteArray RawBytes) {
-
-    }
-    private int findRow(ByteArray bytes) {  // returns which row the bytes need to be read from
-        return 0;       
-    }
-    public int DecodeBytes(byte[] RawBytes) {
-        ByteArray bytes = new ByteArray(RawBytes);
-        
-        // Separate into groups
-
-        // Find the row for each group
-
-        // Decode to BCD
-
-        // Read the numbers
-        
-        return 5;
-    }
-}
 
 class Program {
     public static void Main(string[] args) {
-        Console.WriteLine(args.Length);
+        // Check the commandline arguments
         if (args.Length != 1) {
             Console.WriteLine("Incorrect amount of command line args");
             return;
         }
         
+        // Opening the file
         // byte[] myBytes = File.ReadAllBytes("bcd.2000"); // Maybe want a try catch statement here
         BinaryReader br;
 
@@ -121,28 +31,20 @@ class Program {
         catch (IOException e) {
             Console.WriteLine(e.Message + "\n Can't open the file");
             return;
-        }
-        
-        BCDReader bcd = new BCDReader();
-        DPDReader dpd = new DPDReader();
-        bool DPDFlag;
-        byte[] EncodedNum = new byte[4];
-        
-        DPDFlag = br.ReadBoolean();
-        EncodedNum = br.ReadBytes(4);
-        if (DPDFlag) {
-            // Do DPD
-            // Console.WriteLine("I am doing DPD rn");
-            Console.WriteLine(dpd.DecodeBytes(EncodedNum));
+        } 
+        BCD myBCD = new BCD();
+
+
+        if (br.ReadBoolean() == true) {
+            // Handle DPD
         }
         else {
-            // Do BCD
-            Console.WriteLine(bcd.DecodeBytes(EncodedNum));
-            
+            // Handle BCD
+            myBCD.Raw = BinaryPrimitives.ReverseEndianness(br.ReadUInt32());
+
+            // Console.WriteLine(Convert.ToString(myBCD.Val, 2));
+            Console.WriteLine(myBCD.Val);
         }
-
-
-
 
     }
 }
