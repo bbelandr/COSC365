@@ -32,11 +32,15 @@ class Program {
             Console.WriteLine(e.Message + "\n Can't open the file");
             return;
         } 
+        DPD myDPD = new DPD();
         BCD myBCD = new BCD();
 
 
         if (br.ReadBoolean() == true) {
             // Handle DPD
+            myDPD.Raw = BinaryPrimitives.ReverseEndianness(br.ReadUInt32());
+
+            Console.WriteLine(Convert.ToString(myDPD.Val, 2));
         }
         else {
             // Handle BCD
