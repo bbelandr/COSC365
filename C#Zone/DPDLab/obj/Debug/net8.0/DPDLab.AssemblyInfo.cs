@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DPDLab")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+023388e50d6e943f8cbfe44be3a4ead77292aa13")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cda98e5155c78cb5b2b691bd8c073c92eddee035")]
 [assembly: System.Reflection.AssemblyProductAttribute("DPDLab")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DPDLab")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
