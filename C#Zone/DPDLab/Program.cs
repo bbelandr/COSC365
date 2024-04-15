@@ -1,16 +1,4 @@
 ﻿using System.Buffers.Binary;
-interface ICompValue : System.IComparable {
-    //  CompareTo(object)
-    // Needs to:
-    // return -1 if this.Val < object.Val (object typecasted into ICompValue)
-    // return 0 if this.Val == object.Val (object typecasted into ICompValue)
-    // return 1 if this.Val > object.Val
-
-    // Raw property (gets/sets the RAW DPD or BCD)
-    uint Raw { get; set; }
-    // Decoded property (gets the actual number)
-    uint Val { get; }
-}
 
 
 class Program {
@@ -32,23 +20,40 @@ class Program {
             Console.WriteLine(e.Message + "\n Can't open the file");
             return;
         } 
-        DPD myDPD = new DPD();
-        BCD myBCD = new BCD();
+        List<BCDDecoderBase> FileVals = new List<BCDDecoderBase>(); // Holds all the BCD and DPD information
 
+        while (br.BaseStream.Position != br.BaseStream.Length) {
+            if (br.ReadBoolean() == true) {
+                // Handle DPD
+                DPD myDPD = new DPD();
+                myDPD.Raw = BinaryPrimitives.ReverseEndianness(br.ReadUInt32());
 
-        if (br.ReadBoolean() == true) {
-            // Handle DPD
-            myDPD.Raw = BinaryPrimitives.ReverseEndianness(br.ReadUInt32());
+                // Console.WriteLine(Convert.ToString(myDPD.Val, 2));
+                // Console.WriteLine(myDPD.Val);
+                FileVals.Add(myDPD);
+            }
+            else {
+                // Handle BCD
+                BCD myBCD = new BCD();
+                myBCD.Raw = BinaryPrimitives.ReverseEndianness(br.ReadUInt32());
 
-            Console.WriteLine(Convert.ToString(myDPD.Val, 2));
+                // Console.WriteLine(Convert.ToString(myBCD.Val, 2));
+                // Console.WriteLine(myBCD.Val);
+                FileVals.Add(myBCD);
+            }
+        
         }
-        else {
-            // Handle BCD
-            myBCD.Raw = BinaryPrimitives.ReverseEndianness(br.ReadUInt32());
-
-            // Console.WriteLine(Convert.ToString(myBCD.Val, 2));
-            Console.WriteLine(myBCD.Val);
+        FileVals.Sort();
+        // Console.WriteLine(val.Val);
+        string fileName = args[0] + ".txt";
+        using (StreamWriter writer = new StreamWriter(fileName))
+        {
+            foreach (BCDDecoderBase val in FileVals)
+            {
+                writer.WriteLine(val.Val);
+            }
         }
+        Console.WriteLine("Values written to " + fileName);
 
     }
 }

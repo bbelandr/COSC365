@@ -1,20 +1,9 @@
 using System.Text.RegularExpressions;
 
-class DPD : ICompValue {
-    private uint _raw;
-    // private int[,] DPDBits = {  // The sub-arrays record where each letter is within the DPD-packed format. DPDBits[0,1] records where B is in the first row.
-    //     {9, 8, 7, 6, 5, 4, 2, 1, 0},
-    //     {9, 8, 7, 6, 5, 4, -1, -1, 0},  // in this case, -1 means that there is no location for g and h
-    //     {9, 8, 7, -1, -1, 4, 6, 5, 0},
-    //     {-1, -1, 7, 6, 5, 4, 9, 8, 0},
-    //     {-1, -1, 7, -1, -1, 4, 9, 8, 0},
-    //     {-1, -1, 7, 9, 8, 4, -1, -1, 0},
-    //     {9, 8 , 7, -1, -1, 4, -1, -1, 0},
-    //     {-1, -1, 7, -1, -1, 4, -1, -1, 0}
+class DPD : BCDDecoderBase {
+    private uint _raw;  // Holds the raw bits to be converted
 
-    // };
-
-    private char[][] DPDBits = {
+    private static char[][] DPDBits = {    // The 10 bit sequence from each row of the DPD column
         new char[] {'a', 'b', 'c', 'd', 'e', 'f', '0', 'g', 'h', 'i'},
         new char[] {'a', 'b', 'c', 'd', 'e', 'f', '1', '0', '0', 'i'},
         new char[] {'a', 'b', 'c', 'g', 'h', 'f', '1', '0', '1', 'i'},
@@ -24,7 +13,7 @@ class DPD : ICompValue {
         new char[] {'a', 'b', 'c', '1', '0', 'f', '1', '1', '1', 'i'},
         new char[] {'0', '0', 'c', '1', '1', 'f', '1', '1', '1', 'i'}
     };
-    private char[][] BCDBits = {
+    private static char[][] BCDBits = {    // The 12 bit sequence from each row of the BCD column
         new char[] {'0', 'a', 'b', 'c', '0', 'd', 'e', 'f', '0', 'g', 'h', 'i'},
         new char[] {'0', 'a', 'b', 'c', '0', 'd', 'e', 'f', '1', '0', '0', 'i'},
         new char[] {'0', 'a', 'b', 'c', '1', '0', '0', 'f', '0', 'g', 'h', 'i'},
@@ -35,29 +24,9 @@ class DPD : ICompValue {
         new char[] {'1', '0', '0', 'c', '1', '0', '0', 'f', '1', '0', '0', 'i'}
 
     };
-    public DPD() {
-        
-    }
-
-    private bool IsBitSet(uint bits, int index) {
-        return ((bits >> index) & 1) == 1;
-    }
-    private void SetBit(ref uint bits, int index) {
-        bits = bits | (uint)(1 << index);
-    }
-    private void CopyBit(uint sourceBits, int sourceIndex, ref uint destBits, int destIndex) {
-        if (IsBitSet(sourceBits, sourceIndex)) {
-            SetBit(ref destBits, destIndex);
-        }
-    }
-
     
-    int IComparable.CompareTo(object? obj) {
-        // TODO: Compare objects
-        return -1;
-    }
 
-    public uint Raw {
+    public override uint Raw {
         get {
             return _raw;
         }
@@ -66,7 +35,7 @@ class DPD : ICompValue {
         }
     }
 
-    public uint Val {
+    public override uint Val {
         get {
 
             // Separate into groups
@@ -129,18 +98,17 @@ class DPD : ICompValue {
                         SetBit(ref ConvertedBits, i * 12 + j);
                     }
 
-                    Console.Write(currentChar);
+                    // Console.Write(currentChar);
                     
                     BitsIndex = DPDBits[i].Length - 1 - Array.IndexOf(DPDBits[rows[i] - 1], currentChar); 
-                    Console.Write(BitsIndex + " ");
+                    // Console.Write(BitsIndex + " ");
 
                     CopyBit(bitGroups[i], BitsIndex, ref ConvertedBits, i * 12 + j);
                 }
-                Console.WriteLine("   For row " + rows[i]);
-                // DPDBits[rows[i]]
+                // Console.WriteLine("   For row " + rows[i]);
             }
             
-            return ConvertedBits;
+            return ComputeBCD(ConvertedBits);
         }
     }
 }

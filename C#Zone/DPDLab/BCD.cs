@@ -1,10 +1,10 @@
-class BCD : ICompValue {
-    private uint _raw;
-    int IComparable.CompareTo(object? objectIn) {   // The question mark means that the object can be null
-        // TODO: Compare objects
-        return -1;
-    }
-    public uint Raw {
+class BCD : BCDDecoderBase {
+    private uint _raw;  // Holds the bits to be converted
+    // public override int CompareTo(object? objectIn) {   // The question mark means that the object can be null
+    //     // TODO: Compare objects
+    //     return -1;
+    // }
+    public override uint Raw {
         get {
             return _raw;
         }
@@ -13,15 +13,9 @@ class BCD : ICompValue {
         }
     }
 
-    public uint Val {
+    public override uint Val {
         get {
-            uint decodedNum = 0;
-            for (int i = 0; i < 8; i++) {
-                char currentNum = (char)((_raw >> (i * 4)) & 0b_1111);
-                decodedNum += currentNum * (uint)Math.Pow(10, i);
-            }
-
-            return decodedNum;
+            return ComputeBCD(_raw);
         }
     }
 }
